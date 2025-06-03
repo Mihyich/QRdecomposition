@@ -15,7 +15,7 @@ def compute_givens_rotation(a, b):
     r = math.hypot(a, b)
     c = a / r
     s = -b / r
-    return c, s, r
+    return c, s
 
 def apply_givens_rotation(matrix, c, s, i, j, start_col=0):
     """
@@ -47,8 +47,9 @@ def givens_qr_decomposition(A):
     
     for j in range(n):
         for i in range(m-1, j, -1):
+            print(j, i, A[i][j])
             if R[i][j] != 0:
-                c, s, _ = compute_givens_rotation(R[j][j], R[i][j])
+                c, s = compute_givens_rotation(R[j][j], R[i][j])
                 
                 # Вращение к R
                 apply_givens_rotation(R, c, s, j, i, j)
@@ -85,8 +86,12 @@ def print_matrix(matrix, label=""):
 def main():
     # Пример матрицы
     A = [
-        [1, 2],
-        [3, 4]
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+        [10, 11, 12],
+        [13, 14, 15],
+        [16, 17, 18]
     ]
     
     print_matrix(A, "Исходная матрица A:")
